@@ -57,7 +57,7 @@ package com.qunhe.leetcode.editor.cn;
 // 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 //
 // Related Topics 链表
-// 👍 1004 👎 0
+// 👍 1005 👎 0
 
 public class P160IntersectionOfTwoLinkedLists {
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -83,6 +83,6 @@ public class P160IntersectionOfTwoLinkedLists {
             return l1;
         }
     }
-//leetcode subt region end(Prohibit modification and deletion)
+//leetcode submit region end(Prohibit modification and deletion)
 
 }
