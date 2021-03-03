@@ -1,16 +1,12 @@
 package com.qunhe.leetcode.editor.cn;
 
 /**
- * Function:
+ * Function: 链表节点
  *
  * @author tiangua
- * @date 2020/7/5
+ * @date 2021/3/3
  */
 public class ListNode {
     int val;
     ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
 }
