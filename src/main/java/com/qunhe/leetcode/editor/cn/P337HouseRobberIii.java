@@ -33,6 +33,8 @@ package com.qunhe.leetcode.editor.cn;
 // Related Topics 树 深度优先搜索 动态规划
 // 👍 756 👎 0
 
+import java.util.HashMap;
+
 public class P337HouseRobberIii {
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -53,18 +55,28 @@ public class P337HouseRobberIii {
      */
     class Solution {
         public int rob(TreeNode root) {
+            HashMap<TreeNode, Integer> memo = new HashMap<>();
+            return robInternal(root, memo);
+        }
+
+        private int robInternal(TreeNode root, HashMap<TreeNode, Integer> memo) {
             if (root == null) {
                 return 0;
             }
+            if (memo.containsKey(root)) {
+                return memo.get(root);
+            }
             int val1 = root.val;
             if (root.left != null) {
-                val1 += rob(root.left.left) + rob(root.left.right);
+                val1 += robInternal(root.left.left, memo) + robInternal(root.left.right, memo);
             }
             if (root.right != null) {
-                val1 += rob(root.right.left) + rob(root.right.right);
+                val1 += robInternal(root.right.left, memo) + robInternal(root.right.right, memo);
             }
-            int val2 = rob(root.left) + rob(root.right);
-            return Math.max(val1, val2);
+            int val2 = robInternal(root.left, memo) + robInternal(root.right, memo);
+            int result = Math.max(val1, val2);
+            memo.put(root, result);
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
