@@ -1,5 +1,5 @@
 package com.qunhe.leetcode.editor.cn;
-//给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+//给定一个二叉树的根节点 root ，返回它的 中序 遍历。
 //
 //
 //
@@ -7,7 +7,7 @@ package com.qunhe.leetcode.editor.cn;
 //
 //
 //输入：root = [1,null,2,3]
-//输出：[1,2,3]
+//输出：[1,3,2]
 //
 //
 // 示例 2：
@@ -28,7 +28,7 @@ package com.qunhe.leetcode.editor.cn;
 //
 //
 //输入：root = [1,2]
-//输出：[1,2]
+//输出：[2,1]
 //
 //
 // 示例 5：
@@ -49,15 +49,15 @@ package com.qunhe.leetcode.editor.cn;
 //
 //
 //
-// 进阶：递归算法很简单，你可以通过迭代算法完成吗？
-// Related Topics 栈 树
-// 👍 536 👎 0
+// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+// Related Topics 栈 树 哈希表
+// 👍 883 👎 0
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class P144BinaryTreePreorderTraversal {
+public class P94BinaryTreeInorderTraversal {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
@@ -76,18 +76,21 @@ public class P144BinaryTreePreorderTraversal {
      * }
      */
     class Solution {
-        public List<Integer> preorderTraversal(TreeNode root) {
+        public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> list = new ArrayList<>();
+            if (root == null) {
+                return list;
+            }
             Stack<TreeNode> stack = new Stack<>();
-            stack.push(root);
-            while (!stack.isEmpty()) {
-                TreeNode node = stack.pop();
-                if (node == null) {
-                    continue;
+            TreeNode cur = root;
+            while (cur != null || !stack.isEmpty()) {
+                while (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
                 }
+                TreeNode node = stack.pop();
                 list.add(node.val);
-                stack.push(node.right);
-                stack.push(node.left);
+                cur = node.right;
             }
             return list;
         }

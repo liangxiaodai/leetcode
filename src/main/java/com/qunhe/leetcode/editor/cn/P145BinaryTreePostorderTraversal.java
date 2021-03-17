@@ -43,15 +43,15 @@ public class P145BinaryTreePostorderTraversal {
         public List<Integer> postorderTraversal(TreeNode root) {
             List<Integer> list = new ArrayList<>();
             Stack<TreeNode> stack = new Stack<>();
-            stack.add(root);
+            stack.push(root);
             while (!stack.isEmpty()) {
                 TreeNode node = stack.pop();
                 if (node == null) {
                     continue;
                 }
                 list.add(node.val);
-                stack.add(node.left);
-                stack.add(node.right);
+                stack.push(node.left);
+                stack.push(node.right);
             }
             Collections.reverse(list);
             return list;
