@@ -54,8 +54,25 @@ public class P230KthSmallestElementInABst {
      * }
      */
     class Solution {
+        private int cnt = 0;
+        private int val;
+
         public int kthSmallest(TreeNode root, int k) {
-            return 0;
+            inOrder(root, k);
+            return val;
+        }
+
+        private void inOrder(TreeNode node, int k) {
+            if (node == null) {
+                return;
+            }
+            inOrder(node.left, k);
+            cnt++;
+            if (cnt == k) {
+                val = node.val;
+                return;
+            }
+            inOrder(node.right, k);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
