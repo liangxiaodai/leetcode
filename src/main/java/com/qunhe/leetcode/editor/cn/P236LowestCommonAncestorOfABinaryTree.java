@@ -57,11 +57,16 @@ public class P236LowestCommonAncestorOfABinaryTree {
      */
     class Solution {
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            //越过子节点直接返回null
+            //当root等于p或q直接返回root
             if (root == null || root == p || root == q) {
                 return root;
             }
             TreeNode left = lowestCommonAncestor(root.left, p, q);
             TreeNode right = lowestCommonAncestor(root.right, p, q);
+            //当left和right为空，说明root中左/右子树不包含p或者q
+            //当left和right同时不为空，说明p、q分布在root异侧
+            //left为空，right不为空。说明p、q都在右子树，right指向最近的公共节点
             return left == null ? right : right == null ? left : root;
         }
     }
