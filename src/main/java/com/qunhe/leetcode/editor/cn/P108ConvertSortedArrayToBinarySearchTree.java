@@ -34,28 +34,40 @@ package com.qunhe.leetcode.editor.cn;
 // Related Topics 树 深度优先搜索
 // 👍 727 👎 0
 
-public class P108ConvertSortedArrayToBinarySearchTree{
+public class P108ConvertSortedArrayToBinarySearchTree {
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode sortedArrayToBST(int[] nums) {
-        return null;
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        public TreeNode sortedArrayToBST(int[] nums) {
+            return toBST(nums, 0, nums.length - 1);
+        }
+
+        private TreeNode toBST(int[] nums, int sIdx, int eIdx) {
+            if (sIdx > eIdx) {
+                return null;
+            }
+            int mIdx = (sIdx + eIdx) / 2;
+            TreeNode root = new TreeNode(nums[mIdx]);
+            root.left = toBST(nums, sIdx, mIdx - 1);
+            root.right = toBST(nums, mIdx + 1, eIdx);
+            return root;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
