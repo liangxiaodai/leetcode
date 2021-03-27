@@ -67,6 +67,7 @@ public class P155MinStack {
         public void pop() {
             dataStack.pop();
             minStack.pop();
+            //更新min值
             min = minStack.isEmpty() ? Integer.MAX_VALUE : minStack.peek();
         }
 
