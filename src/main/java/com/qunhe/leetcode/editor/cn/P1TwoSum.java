@@ -48,6 +48,7 @@ public class P1TwoSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] twoSum(int[] nums, int target) {
+            //空间换时间
             HashMap<Integer, Integer> hashMap = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
                 if (hashMap.containsKey(target - nums[i])) {
