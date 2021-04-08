@@ -25,11 +25,18 @@ package com.qunhe.leetcode.editor.cn;
 // Related Topics 数组 哈希表
 // 👍 378 👎 0
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class P217ContainsDuplicate {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean containsDuplicate(int[] nums) {
-            return false;
+            Set<Integer> set = new HashSet<>();
+            for (int num : nums) {
+                set.add(num);
+            }
+            return set.size() < nums.length;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
