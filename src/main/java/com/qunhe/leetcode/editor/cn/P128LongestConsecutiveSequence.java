@@ -32,43 +32,53 @@ package com.qunhe.leetcode.editor.cn;
 // Related Topics 并查集 数组
 // 👍 737 👎 0
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 
 public class P128LongestConsecutiveSequence {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int longestConsecutive(int[] nums) {
-            Map<Integer, Integer> countForNum = new HashMap<>();
+            HashSet<Integer> num_set = new HashSet<>();
+            int longestStreak = 0;
+            //去重
             for (int num : nums) {
-                countForNum.put(num, 1);
+                num_set.add(num);
             }
-            for (int num : nums) {
-                forward(countForNum, num);
+            for (int num : num_set) {
+                //跳过的逻辑
+                if (!num_set.contains(num - 1)) {
+                    int currentNum = num;
+                    int currentStreak = 1;
+                    while (num_set.contains(currentNum + 1)) {
+                        currentNum += 1;
+                        currentStreak += 1;
+                    }
+                    longestStreak = Math.max(longestStreak, currentStreak);
+                }
             }
-            return maxCount(countForNum);
+            return longestStreak;
         }
 
-        public int forward(Map<Integer, Integer> countForNum, int num) {
-            if (!countForNum.containsKey(num)) {
-                return 0;
-            }
-            int cnt = countForNum.get(num);
-            if (cnt > 1) {
-                return cnt;
-            }
-            cnt = forward(countForNum, num + 1) + 1;
-            countForNum.put(num, cnt);
-            return cnt;
-        }
+//        public int forward(Map<Integer, Integer> countForNum, int num) {
+//            if (!countForNum.containsKey(num)) {
+//                return 0;
+//            }
+//            int cnt = countForNum.get(num);
+//            if (cnt > 1) {
+//                return cnt;
+//            }
+//            cnt = forward(countForNum, num + 1) + 1;
+//            countForNum.put(num, cnt);
+//            return cnt;
+//        }
 
-        private int maxCount(Map<Integer, Integer> countForNum) {
-            int max = 0;
-            for (int num : countForNum.keySet()) {
-                max = Math.max(max, countForNum.get(num));
-            }
-            return max;
-        }
+//        private int maxCount(Map<Integer, Integer> countForNum) {
+//            int max = 0;
+//            for (int num : countForNum.keySet()) {
+//                max = Math.max(max, countForNum.get(num));
+//            }
+//            return max;
+//        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
